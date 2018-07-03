@@ -12,7 +12,7 @@
     "jquery": "^3.3.1",
     "query-string": "^6.1.0",
     "three": "^0.94.0",
-    "three-addons": "^1.2.0",
-    "three-gltf-loader": "^1.94.0"
+    "three-gltf-loader": "^1.94.0",
+    "three-orbit-controls": "^82.1.0"
   }
 }
