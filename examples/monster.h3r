@@ -1,0 +1,6 @@
+{
+ "gltf" :[ 
+    "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Monster/glTF-Binary/Monster.glb",
+    "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/VC/glTF-Binary/VC.glb"
+  ]
+}

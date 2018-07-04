@@ -10,14 +10,17 @@ var
   },
   container,
   btnPlay,
-  slider;
+  slider,
+  loading;
 
 
 GUI.Init = function() {
   container   = $("body");
   initPlayBtn();
   initSlider();
+  initLoading();
 }
+
 
 
 GUI.SetTime = function(time) {
@@ -42,6 +45,19 @@ GUI.Size = function() {
     height: height,
     ratio : width / height
   }
+}
+
+GUI.LoadingXHR = function(percent) {
+  if (percent == 100) {
+    loading.hide();
+    return
+  }
+  loading.show();
+  loading.html("LOADING(" + percent.toPrecision(2) + "%)");
+}
+
+function initLoading() {
+  loading = $(".h3r-loading");
 }
 
 function initSlider() {

@@ -13,9 +13,9 @@ var
     Duration : 0.0
   },
   actions      = [],
+  mixers       = [],
   container    = null,
   renderer     = null,
-  mixer        = null,
   camera       = null,
   audio        = null,
   scene        = new THREE.Scene(),
@@ -70,8 +70,8 @@ Scene.Pause = function() {
 
 function initAnimation() {
   Scene.on("update", function(delta) {
-    if (!mixer) return;
-    mixer.update(0);
+
+    mixers.forEach((mixer) => {mixer.update(0)});
     if (Scene.State == "play") {
       GUI.Time = Scene.time;
       Scene.Time += delta;
@@ -98,7 +98,8 @@ function addGLTF(url) {
       object.frustumCulled = false;
     });
 
-    mixer = new THREE.AnimationMixer(gltf.scene);
+    var mixer = new THREE.AnimationMixer(gltf.scene);
+    mixers.push(mixer);
     if (!gltf.animations) return;
 
     gltf.animations.forEach(function(anim) {
@@ -111,7 +112,7 @@ function addGLTF(url) {
     });
 
   }, function(xhr) {
-    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+    GUI.LoadingXHR( (xhr.loaded / xhr.total) * 100)
   });
 }
 
