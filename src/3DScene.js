@@ -10,7 +10,8 @@ var
   Scene        = {
     Time     : 0.0,
     State    : "play", //pause
-    Duration : 0.0
+    Duration : 0.0,
+    Canvas   : null
   },
   actions      = [],
   mixers       = [],
@@ -136,6 +137,7 @@ function initScene() {
   renderer = new THREE.WebGLRenderer( {antialias: true} );
   scene = new THREE.Scene();
   container[0].appendChild( renderer.domElement );
+  Scene.Canvas = renderer.domElement;
   scene.add(new THREE.HemisphereLight( 0xffffff, 0x222222, 1.3));
   scene.background = new THREE.Color( 0x003333);
 

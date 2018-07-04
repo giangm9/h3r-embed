@@ -41,7 +41,7 @@ body {
 }
 
 .h3r-vol-icon {
-  margin-left: 5%;
+  margin-left: 1%;
 }
 
 .h3r-time-slider {
@@ -64,4 +64,7 @@ body {
   position : absolute;
   top: 50%;
   left: 50%;
+}
+
+.h3r-fullscreen {
 }

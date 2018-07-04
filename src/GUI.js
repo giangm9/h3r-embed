@@ -13,15 +13,13 @@ var
   slider,
   loading;
 
-
 GUI.Init = function() {
-  container   = $("body");
+  container = $("body");
   initPlayBtn();
   initSlider();
   initLoading();
+  initFullscreen();
 }
-
-
 
 GUI.SetTime = function(time) {
   GUI.Time = time;
@@ -54,6 +52,17 @@ GUI.LoadingXHR = function(percent) {
   }
   loading.show();
   loading.html("LOADING(" + percent.toPrecision(2) + "%)");
+}
+
+function initFullscreen(){
+  $(".h3r-fullscreen").click( function() {
+    var el = container[0];
+    if(el.webkitRequestFullScreen) {
+      el.webkitRequestFullScreen();
+    } else {
+      el.mozRequestFullScreen();
+    }            
+  });
 }
 
 function initLoading() {
