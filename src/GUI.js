@@ -16,6 +16,7 @@ var
 GUI.Init = function() {
   container   = $("body");
   initPlayBtn();
+  initSlider();
 }
 
 
@@ -49,6 +50,12 @@ function initSlider() {
     .mousedown(() => Scene.Pause())
     .mousemove(() => Scene.Time = GUI.Duration * slider.val())
     .mouseup(() => Scene.Play());
+
+  Scene.on("update", function() {
+    if (Scene.State != 'play') return;
+    var ratio = Scene.Duration == 0 ? 0 : Scene.Time / Scene.Duration;
+    slider.val(ratio)
+  });
 }
 
 function initPlayBtn() {

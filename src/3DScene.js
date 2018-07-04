@@ -1,8 +1,8 @@
-import * as THREE from 'three'
-import GLTFLoader from "three-gltf-loader"
+import * as THREE   from 'three'
+import GLTFLoader   from 'three-gltf-loader'
 import EventEmitter from 'events'
-import GUI from './GUI.js'
-import $ from 'jquery'
+import GUI          from './GUI.js'
+import $            from 'jquery'
 
 const OrbitControls = require('three-orbit-controls')(THREE)
 
@@ -27,7 +27,8 @@ Scene.Init = function() {
   container = $("#h3r-scene-container");
   initCamera();
   initScene(); 
-  initGUI();
+  initAnimation();
+  GUI.UpdateState();
   animate();
 }
 
@@ -53,6 +54,20 @@ Scene.on = function( event, handler ) {
   eventEmitter.on(event, handler);
 }
 
+Scene.Play = function() {
+  Scene.State = "play";
+//  audio.currentTime = this.time;
+//  audio.play();
+  GUI.UpdateState();
+}
+
+Scene.Pause = function() {
+  Scene.State = "pause";
+  actions.forEach((action) => action.paused = true);
+//  audio.pause();
+  GUI.UpdateState();
+}
+
 function initAnimation() {
   Scene.on("update", function(delta) {
     if (!mixer) return;
@@ -68,26 +83,11 @@ function initAnimation() {
     
     if (Scene.Time > Scene.Duration) {
       Scene.Time -= Scene.Duration;
-      audio.currentTime = Scene.Time;
+      audio && (audio.currentTime = Scene.Time)
     }
 
   });
 }
-
-Scene.Play = function() {
-  Scene.State = "play";
-//  audio.currentTime = this.time;
-//  audio.play();
-  GUI.UpdateState();
-}
-
-Scene.Pause = function() {
-  Scene.State = "pause";
-  actions.forEach((action) => action.paused = true);
-//  audio.pause();
-  GUI.UpdateState();
-}
-
 function addGLTF(url) {
 
   loader.load(url, function(gltf) {

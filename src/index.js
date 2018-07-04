@@ -11,7 +11,12 @@ $(() => {
   GUI.Init(); 
   Scene.Init();
   $.get(GetURL(), function(raw) {
+    try {
+
     var data = JSON.parse(raw); 
     Scene.Load(data); 
+    } catch (e) {
+      console.error("parse data error" + e);
+    }
   }).fail(() => console.log("error")) 
 })
