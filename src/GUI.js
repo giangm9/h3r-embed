@@ -1,21 +1,37 @@
 import $ from 'jquery'
-import * as Scene from './3DScene.js'
+import Scene from './3DScene.js'
+
 
 
 var 
-  GUI = {},
+  GUI = {
+    Duration : 0.0,
+    Time : 0.0
+  },
   container,
-  duration,
-  currentTime,
-  btnPlay;
+  btnPlay,
+  slider;
 
 
 GUI.Init = function() {
-  duration    = 0.0;
-  currentTime = 0.0;
   container   = $("body");
+  initPlayBtn();
 }
 
+
+GUI.SetTime = function(time) {
+  GUI.Time = time;
+  var ratio = GUI.Duration == 0 ? 0 : GUI.Time / GUI.Duration;
+  slider.val(ratio);
+}
+
+GUI.UpdateState = function() {
+  if (Scene.State == "play") {
+    btnPlay.attr("src", "img/pause.png");
+  } else {
+    btnPlay.attr("src", "img/play.png");
+  }
+}
 
 GUI.Size = function() {
   var width = container.width(),
@@ -27,5 +43,20 @@ GUI.Size = function() {
   }
 }
 
+function initSlider() {
+  slider = $(".h3r-time-slider").first();
+  slider
+    .mousedown(() => Scene.Pause())
+    .mousemove(() => Scene.Time = GUI.Duration * slider.val())
+    .mouseup(() => Scene.Play());
+}
+
+function initPlayBtn() {
+  btnPlay = $(".h3r-play-icon");
+  btnPlay.click(function()  {
+    Scene.Toggle();
+    GUI.UpdateState();
+  });
+}
 
 export default GUI 

@@ -14,6 +14,4 @@ $(() => {
     var data = JSON.parse(raw); 
     Scene.Load(data); 
   }).fail(() => console.log("error")) 
-  
-  
 })

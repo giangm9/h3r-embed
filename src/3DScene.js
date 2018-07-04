@@ -7,15 +7,17 @@ import $ from 'jquery'
 const OrbitControls = require('three-orbit-controls')(THREE)
 
 var 
-  Scene        = {},
-  duration     = 0,
-  time         = 0,
-  state        = "play", //pause
+  Scene        = {
+    Time     : 0.0,
+    State    : "play", //pause
+    Duration : 0.0
+  },
   actions      = [],
   container    = null,
   renderer     = null,
   mixer        = null,
   camera       = null,
+  audio        = null,
   scene        = new THREE.Scene(),
   clock        = new THREE.Clock(),
   eventEmitter = new EventEmitter(),
@@ -25,6 +27,7 @@ Scene.Init = function() {
   container = $("#h3r-scene-container");
   initCamera();
   initScene(); 
+  initGUI();
   animate();
 }
 
@@ -32,11 +35,57 @@ Scene.Load = function(data) {
   data.gltf.forEach( function(url) {
     addGLTF(url);
   });
+
+  if (data.bgm) {
+    audio = new Audio(data.bgm);
+  }
 }
 
+Scene.Toggle = function() {
+  if (Scene.State == "play") {
+    Scene.Pause();
+  } else {
+    Scene.Play();
+  }
+}
 
 Scene.on = function( event, handler ) {
   eventEmitter.on(event, handler);
+}
+
+function initAnimation() {
+  Scene.on("update", function(delta) {
+    if (!mixer) return;
+    mixer.update(0);
+    if (Scene.State == "play") {
+      GUI.Time = Scene.time;
+      Scene.Time += delta;
+    }
+
+    actions.forEach(function(action) {
+      action.time = Scene.Time;
+    });
+    
+    if (Scene.Time > Scene.Duration) {
+      Scene.Time -= Scene.Duration;
+      audio.currentTime = Scene.Time;
+    }
+
+  });
+}
+
+Scene.Play = function() {
+  Scene.State = "play";
+//  audio.currentTime = this.time;
+//  audio.play();
+  GUI.UpdateState();
+}
+
+Scene.Pause = function() {
+  Scene.State = "pause";
+  actions.forEach((action) => action.paused = true);
+//  audio.pause();
+  GUI.UpdateState();
 }
 
 function addGLTF(url) {
@@ -57,8 +106,8 @@ function addGLTF(url) {
       var max = Math.max;
       actions.push(action);
       action.play();
-      GUI.duration = max(GUI.duration, anim.duration);
-      duration = max(duration, anim.duration);
+      GUI.Duration = max(GUI.Duration, anim.duration);
+      Scene.Duration = max(Scene.Duration , anim.duration);
     });
 
   }, function(xhr) {
@@ -99,8 +148,7 @@ function initScene() {
 
 function animate() {
   requestAnimationFrame(animate);
-  var delta = clock.getDelta();
-  eventEmitter.emit("update", delta);
+  eventEmitter.emit("update", clock.getDelta());
 }
 
 export default Scene;
