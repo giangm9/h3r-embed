@@ -1,0 +1,37 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+<C-S-B>	.vim	/^map <C-S-B> :!webpack --config webpack.config.js<CR>$/;"	m
+Duration	src/GUI.js	/^var GUI = {$/;"	p	class:GUI
+Time	src/3DScene.js	/^var Scene = {$/;"	p	class:Scene
+__webpack_require__	dist/h3r-embed.js	/^\/******\/ 	function __webpack_require__(moduleId) {$/;"	f
+__webpack_require__.d	dist/h3r-embed.js	/^\/******\/ 	__webpack_require__.c = installedModules;$/;"	f
+__webpack_require__.n	dist/h3r-embed.js	/^\/******\/ 	};$/;"	f
+__webpack_require__.o	dist/h3r-embed.js	/^\/******\/ 	};$/;"	f
+__webpack_require__.r	dist/h3r-embed.js	/^\/******\/ 	};$/;"	f
+actions	src/3DScene.js	/^var$/;"	v
+addGLTF	src/3DScene.js	/^function addGLTF(url) {$/;"	f
+animate	src/3DScene.js	/^function animate() {$/;"	f
+container	src/GUI.js	/^var container,$/;"	v
+entry	webpack.config.js	/^  mode : "development",$/;"	p	class:module.exports
+hasOwnProperty	dist/h3r-embed.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	m	class:return
+init	src/3DScene.js	/^function init() {$/;"	f
+initAnimation	src/3DScene.js	/^function initAnimation() {$/;"	f
+initCamera	src/3DScene.js	/^function initCamera() {$/;"	f
+initFullscreen	src/GUI.js	/^function initFullscreen() {$/;"	f
+initLoading	src/GUI.js	/^function initLoading() {$/;"	f
+initPlayBtn	src/GUI.js	/^function initPlayBtn() {$/;"	f
+initScene	src/3DScene.js	/^function initScene() {$/;"	f
+initSlider	src/GUI.js	/^function initSlider() {$/;"	f
+load	src/3DScene.js	/^function load(data) {$/;"	f
+mode	webpack.config.js	/^module.exports = {$/;"	p	class:module.exports
+on	src/3DScene.js	/^function on(event, handler) {$/;"	f
+output	webpack.config.js	/^  entry: '.\/src\/index.js',$/;"	p	class:module.exports
+pause	src/3DScene.js	/^function pause() {$/;"	f
+play	src/3DScene.js	/^function play () {$/;"	f
+ratio	src/GUI.js	/^    var ratio = GUI.Duration == 0 ? 0 : GUI.Time \/ GUI.Duration;$/;"	v
+return	dist/h3r-embed.js	/^\/******\/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };$/;"	c
+toggle	src/3DScene.js	/^function toggle () {$/;"	f

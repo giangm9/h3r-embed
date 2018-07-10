@@ -1,42 +1,44 @@
-import * as THREE from 'three';
-import GLTFLoader from 'three-gltf-loader';
-import EventEmitter from 'events';
-import GUI from './GUI.js';
-import $ from 'jquery';
+import * as THREE   from 'three'
+import GLTFLoader   from 'three-gltf-loader'
+import EventEmitter from 'events'
+import GUI          from './GUI.js'
+import $            from 'jquery'
+import Env          from './Env.js' 
+
 
 const OrbitControls = require('three-orbit-controls')(THREE);
 
 var Scene = {
-  Time: 0.0,
-  State: "play", //pause
-  Duration: 0.0,
-  Canvas: null,
-  Load : load,
-  Init: init,
-  Toggle: toggle,
-  Play: play,
-  Pause : pause,
-  on: on
-
+  Time     : 0.0,
+  State    : "play", //pause
+  Duration : 0.0,
+  Canvas   : null,
+  Load     : load,
+  Init     : init,
+  Toggle   : toggle,
+  Play     : play,
+  Pause    : pause,
+  on       : on
 };
 
 var
-  actions = [],
-  mixers = [],
-  container = null,
-  renderer = null,
-  camera = null,
-  audio = null,
-  scene = new THREE.Scene(),
-  clock = new THREE.Clock(),
+  actions      = [],
+  mixers       = [],
+  container    = null,
+  renderer     = null,
+  camera       = null,
+  audio        = null,
+  scene        = new THREE.Scene(),
+  clock        = new THREE.Clock(),
   eventEmitter = new EventEmitter(),
-  loader = new GLTFLoader();
+  loader       = new GLTFLoader();
 
 
 function init() {
   container = $("#h3r-scene-container");
   initCamera();
   initScene();
+  Env.Init(camera, renderer, Scene);
   initAnimation();
   GUI.UpdateState();
   animate();
