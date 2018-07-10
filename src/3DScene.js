@@ -97,6 +97,9 @@ function addGLTF(url) {
 
     gltf.scene.traverse(function (object) {
       object.frustumCulled = false;
+      if (object.isMesh)  {
+        object.material.side = THREE.DoubleSide; 
+      }
     });
 
     var mixer = new THREE.AnimationMixer(gltf.scene);
@@ -113,7 +116,7 @@ function addGLTF(url) {
     });
 
   }, function(xhr) {
-    GUI.LoadingXHR( (xhr.loaded / xhr.total) * 100)
+    GUI.LoadingXHR( (xhr.loaded / xhr.total) * 100);
   });
 }
 
@@ -139,7 +142,7 @@ function initScene() {
   container[0].appendChild( renderer.domElement );
   Scene.Canvas = renderer.domElement;
   scene.add(new THREE.HemisphereLight( 0xffffff, 0x222222, 1.3));
-  scene.background = new THREE.Color( 0x003333);
+  scene.background = new THREE.Color( 0x111111);
 
   Scene.on("update", function() {
     var size = GUI.Size();
