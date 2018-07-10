@@ -1,67 +1,67 @@
-import $ from 'jquery'
-import Scene from './3DScene.js'
+import $ from 'jquery';
+import Scene from './3DScene.js';
 
-
-
-var 
-  GUI = {
-    Duration : 0.0,
-    Time : 0.0
+var GUI = {
+  Duration: 0.0,
+  Time: 0.0,
+  Init: function () {
+    container = $("body");
+    initPlayBtn();
+    initSlider();
+    initLoading();
+    initFullscreen();
   },
-  container,
+  SetTime: function (time) {
+    GUI.Time = time;
+    var ratio = GUI.Duration == 0 ? 0 : GUI.Time / GUI.Duration;
+    slider.val(ratio);
+  },
+  UpdateState: function () {
+    if (Scene.State == "play") {
+      btnPlay.attr("src", "img/pause.png");
+    } else {
+      btnPlay.attr("src", "img/play.png");
+    }
+  },
+  Size: function () {
+    var width = container.width(),
+      height = container.height();
+    return {
+      width: width,
+      height: height,
+      ratio: width / height
+    };
+  },
+
+  LoadingXHR: function (percent) {
+    if (percent == 100) {
+      loading.hide();
+      return;
+    }
+    loading.show();
+    loading.html("LOADING(" + percent.toPrecision(2) + "%)");
+  }
+
+
+};
+
+var container,
   btnPlay,
   slider,
   loading;
 
-GUI.Init = function() {
-  container = $("body");
-  initPlayBtn();
-  initSlider();
-  initLoading();
-  initFullscreen();
-}
 
-GUI.SetTime = function(time) {
-  GUI.Time = time;
-  var ratio = GUI.Duration == 0 ? 0 : GUI.Time / GUI.Duration;
-  slider.val(ratio);
-}
 
-GUI.UpdateState = function() {
-  if (Scene.State == "play") {
-    btnPlay.attr("src", "img/pause.png");
-  } else {
-    btnPlay.attr("src", "img/play.png");
-  }
-}
 
-GUI.Size = function() {
-  var width = container.width(),
-    height = container.height();
-  return {
-    width: width,
-    height: height,
-    ratio : width / height
-  }
-}
 
-GUI.LoadingXHR = function(percent) {
-  if (percent == 100) {
-    loading.hide();
-    return
-  }
-  loading.show();
-  loading.html("LOADING(" + percent.toPrecision(2) + "%)");
-}
-
-function initFullscreen(){
-  $(".h3r-fullscreen").click( function() {
+function initFullscreen() {
+  $(".h3r-fullscreen").click(function () {
     var el = container[0];
-    if(el.webkitRequestFullScreen) {
+    if (el.webkitRequestFullScreen) {
       el.webkitRequestFullScreen();
     } else {
       el.mozRequestFullScreen();
-    }            
+    }
   });
 }
 
@@ -76,19 +76,19 @@ function initSlider() {
     .mousemove(() => Scene.Time = GUI.Duration * slider.val())
     .mouseup(() => Scene.Play());
 
-  Scene.on("update", function() {
+  Scene.on("update", function () {
     if (Scene.State != 'play') return;
     var ratio = Scene.Duration == 0 ? 0 : Scene.Time / Scene.Duration;
-    slider.val(ratio)
+    slider.val(ratio);
   });
 }
 
 function initPlayBtn() {
   btnPlay = $(".h3r-play-icon");
-  btnPlay.click(function()  {
+  btnPlay.click(function () {
     Scene.Toggle();
     GUI.UpdateState();
   });
 }
 
-export default GUI 
+export default GUI;
