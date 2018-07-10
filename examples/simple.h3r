@@ -1,3 +1,6 @@
 {
-  "gltf" : ["examples/gltf/CesiumMan.glb"]
+  "gltf" : [
+    "examples/gltf/CesiumMan.glb",
+    "examples/gltf/stage1x2color.glb"
+  ]
 }
