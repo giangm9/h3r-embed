@@ -1,10 +1,10 @@
 import * as THREE   from 'three'
 import GLTFLoader   from 'three-gltf-loader'
 import EventEmitter from 'events'
-import GUI          from './GUI.js'
+import VRControls   from 'three-vrcontrols-module';
 import $            from 'jquery'
+import GUI          from './GUI.js'
 import Env          from './Env.js' 
-
 
 const OrbitControls = require('three-orbit-controls')(THREE);
 
@@ -28,6 +28,7 @@ var
   renderer     = null,
   camera       = null,
   audio        = null,
+  vrControl    = null,
   scene        = new THREE.Scene(),
   clock        = new THREE.Clock(),
   eventEmitter = new EventEmitter(),
@@ -38,10 +39,14 @@ function init() {
   container = $("#h3r-scene-container");
   initCamera();
   initScene();
+  initLight();
   Env.Init(camera, renderer, Scene);
   initAnimation();
   GUI.UpdateState();
   animate();
+  vrControl = new VRControls(camera);
+  console.log(vrControl);
+  global.vr = vrControl;
 }
 
 /**
@@ -120,7 +125,11 @@ function addGLTF(url) {
       object.frustumCulled = false;
       if (object.isMesh) {
         object.material.side = THREE.DoubleSide;
+//        object.castShadow = true;
+//        object.receiveShadow = true;
       }
+
+
     });
 
     var mixer = new THREE.AnimationMixer(gltf.scene);
@@ -158,11 +167,12 @@ function initCamera() {
 
 function initScene() {
   var size = GUI.Size();
-  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ antialias: false});
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   scene = new THREE.Scene();
   container[0].appendChild(renderer.domElement);
   Scene.Canvas = renderer.domElement;
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x222222, 1.3));
   scene.background = new THREE.Color(0x111111);
 
   Scene.on("update", function () {
@@ -172,6 +182,21 @@ function initScene() {
   });
 }
 
+function initLight() {
+
+    var light = new THREE.DirectionalLight( 0xffffff, 20, 100);
+  light.position.set( 5, 50, -4 ); 			//default; light shining from top
+ // light.castShadow = true;            // default false
+  scene.add( light );
+
+  //Set up shadow properties for the light
+  light.shadow.mapSize.width = 2048;  // default
+  light.shadow.mapSize.height = 2048; // default
+  light.shadow.camera.near = 0.5;    // default
+  light.shadow.camera.far = 2500;     // default
+  scene.add( new THREE.HemisphereLight( 0xffffbb, 0x080820, 1.2 ) );
+  scene.add( new THREE.DirectionalLightHelper(light) );
+}
 
 function animate() {
   requestAnimationFrame(animate);

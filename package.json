@@ -13,6 +13,7 @@
     "query-string": "^6.1.0",
     "three": "^0.94.0",
     "three-gltf-loader": "^1.94.0",
-    "three-orbit-controls": "^82.1.0"
+    "three-orbit-controls": "^82.1.0",
+    "three-vrcontrols-module": "^2.2.1"
   }
 }
