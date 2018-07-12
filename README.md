@@ -24,3 +24,5 @@ To render a .h3r file, just use an iframe
 <iframe src="?url=[url_to_h3r_file]">
 </iframe>
 ```
+
+see [wiki](https://github.com/giangm9/h3r-embed/wiki/H3R-Wiki) to get the build instruction
