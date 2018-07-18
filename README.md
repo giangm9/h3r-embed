@@ -21,7 +21,7 @@ for example
 ## Renderer
 To render a .h3r file, just use an iframe 
 ```html
-<iframe src="?url=[url_to_h3r_file]">
+<iframe src="https://giangm9.github.io/h3r-embed?url=[url_to_h3r_file]">
 </iframe>
 ```
 
