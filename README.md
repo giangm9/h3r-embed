@@ -24,5 +24,12 @@ To render a .h3r file, just use an iframe
 <iframe src="https://giangm9.github.io/h3r-embed?url=[url_to_h3r_file]">
 </iframe>
 ```
+example 
+## Build
+```html
+<iframe src="https://giangm9.github.io/h3r-embed?url=https://raw.githubusercontent.com/giangm9/h3r-embed/master/examples/simple.h3r">
+</iframe>
+```
 
 see [wiki](https://github.com/giangm9/h3r-embed/wiki/H3R-Wiki) to get the build instruction
+
