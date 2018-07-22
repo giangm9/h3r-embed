@@ -1,5 +1,7 @@
 body {
   margin: 0px;
+  height: 100%;
+  width: 100%;
 }
 
 .h3r-scene-container {
@@ -10,9 +12,11 @@ body {
   margin: 0px;
   text-align: center;
 }
+
+
 .h3r-gui-wrapper {
   position: absolute;
-  width: 90%;
+  width: 100%;
   bottom: 0px;
   left : 50%;
   background-color: rgba(255, 255, 255, 0.3);
