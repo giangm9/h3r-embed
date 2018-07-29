@@ -48,13 +48,15 @@ var GUI = {
 var container,
   btnPlay,
   slider,
-  loading;
+  loading,
+    fullscreen;
 
 
 
 
 
 function initFullscreen() {
+    fullscreen = $(".h3r-fullscreen")
   $(".h3r-fullscreen").click(function () {
     var elem = container[0] || document.documentElement;
       if (!document.fullscreenElement && !document.mozFullScreenElement &&
@@ -68,6 +70,7 @@ function initFullscreen() {
           } else if (elem.webkitRequestFullscreen) {
               elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
           }
+          fullscreen.attr("src","img/exitfullscreen.png");
       } else {
           if (document.exitFullscreen) {
               document.exitFullscreen();
@@ -78,6 +81,7 @@ function initFullscreen() {
           } else if (document.webkitExitFullscreen) {
               document.webkitExitFullscreen();
           }
+          fullscreen.attr("src","img/fullscreen.png");
       }
     // if (el.webkitRequestFullScreen) {
     //   el.webkitRequestFullScreen();
