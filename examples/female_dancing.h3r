@@ -1,0 +1,8 @@
+{
+"keywords" : ["dancing_girl", "test", "2people"],
+"name" 		: "Dancing Girl",
+"gltf" 		: [
+	"examples/gltf/femaile_aodai_dance.glb", 
+	 "examples/gltf/dancing-girl-with-stage.glb"
+		]
+}
